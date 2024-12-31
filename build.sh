@@ -29,7 +29,7 @@ BSP_BUILD_DT_OVERLAY=y
 CC=clang
 LD=ld.lld
 "
-export PROJECT_NAME="a06"
+export PROJECT_NAME="a03"
 export ARCH=arm64
 export CLANG_TRIPLE=aarch64-linux-gnu-
 export KCFLAGS=-w
