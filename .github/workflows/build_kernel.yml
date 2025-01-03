@@ -55,6 +55,7 @@ jobs:
         export BUILD_START=`date +'%d %B %Y @ %m:%M'`
         export SELINUX_STATE="Enforcing"
         export IS_CI=true
+        export LTO="thin"
         export DEFCONFIG="rsuntk_defconfig"
         export DEVICE="A035F"
         export DEVICE_ID="A03"
