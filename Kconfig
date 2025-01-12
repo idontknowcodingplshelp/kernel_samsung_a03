@@ -12,3 +12,18 @@ config SRCARCH
 source "arch/$SRCARCH/Kconfig"
 
 source "test/Kconfig"
+
+menu "Rissu misc"
+config RSU_BYPASS_VERMAGIC
+	bool "Bypass module version magic"
+	default n
+	help
+	 If this option enabled, it will bypass vermagic.
+
+config RSU_BYPASS_SYMVERSION
+	bool "Bypass module symversion check"
+	default n
+	help
+	 If this option enabled, it will bypass symversion check.
+
+endmenu
