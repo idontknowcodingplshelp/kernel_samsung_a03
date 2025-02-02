@@ -1341,25 +1341,17 @@ static int check_version(const struct load_info *info,
 			return 1;
 		pr_debug("Found checksum %X vs module %lX\n",
 			 crcval, versions[i].crc);
-#ifdef CONFIG_RSU_BYPASS_SYMVERSION
-		pr_info("BYPASS: %s: disagrees about version of symbol %s\n",
-			__func__, info->name, symname);
-		return 1;
-#else
 		goto bad_version;
-#endif	
 	}
 
 	/* Broken toolchain. Warn once, then let it go.. */
 	pr_warn_once("%s: no symbol version for %s\n", info->name, symname);
 	return 1;
 
-#ifndef CONFIG_RSU_BYPASS_SYMVERSION
 bad_version:
 	pr_warn("%s: disagrees about version of symbol %s\n",
 	       info->name, symname);
 	return 0;
-#endif
 }
 
 static inline int check_modstruct_version(const struct load_info *info,
@@ -3077,14 +3069,9 @@ static int check_modinfo(struct module *mod, struct load_info *info, int flags)
 		if (err)
 			return err;
 	} else if (!same_magic(modmagic, vermagic, info->index.vers)) {
-#ifdef CONFIG_RSU_BYPASS_VERMAGIC
-		pr_info("BYPASS: %s: %s: version magic '%s' should be '%s'\n",
-				__func__, info->name, modmagic, vermagic);
-#else
 		pr_err("%s: version magic '%s' should be '%s'\n",
 		       info->name, modmagic, vermagic);
 		return -ENOEXEC;
-#endif	
 	}
 
 	if (!get_modinfo(info, "intree")) {
