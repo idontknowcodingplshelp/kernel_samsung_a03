@@ -126,3 +126,4 @@ obj-$(CONFIG_E_SHOW_MEM) += emem.o
 GCOV_PROFILE_emem.o := $(CONFIG_SPRD_MEM_GCOV)
 obj-$(CONFIG_PROCESS_RECLAIM)	+= process_reclaim.o
 GCOV_PROFILE_process_reclaim.o := $(CONFIG_SPRD_MEM_GCOV)
+obj-$(CONFIG_PRLMK)	+= prlmk.o
