@@ -696,6 +696,10 @@ struct task_struct {
 	unsigned int			flags;
 	unsigned int			ptrace;
 
+#ifdef CONFIG_ANDROID_SIMPLE_LMK
+    struct task_struct *simple_lmk_next;
+#endif
+
 #ifdef CONFIG_SMP
 	struct llist_node		wake_entry;
 	int				on_cpu;
