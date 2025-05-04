@@ -3131,15 +3131,20 @@ out:
 		zram_set_handle(zram, index, handle);
 		zram_set_obj_size(zram, index, comp_len);
 #ifdef CONFIG_ZRAM_LRU_WRITEBACK
-		if (!page->mem_cgroup ||
-		    page->mem_cgroup->swappiness != NON_LRU_SWAPPINESS) {
-			spin_lock_irqsave(&zram->list_lock, irq_flags);
-			list_add_tail(&zram->table[index].lru_list, &zram->list);
-			spin_unlock_irqrestore(&zram->list_lock, irq_flags);
-			zram_set_flag(zram, index, ZRAM_LRU);
-			atomic64_inc(&zram->stats.lru_pages);
-		}
+#if defined(CONFIG_MEMCG) && defined(CONFIG_MEMCG_KMEM)
+	if (!page->mem_cgroup ||
+	    page->mem_cgroup->swappiness != NON_LRU_SWAPPINESS) {
+		spin_lock_irqsave(&zram->list_lock, irq_flags);
+		list_add_tail(&zram->table[index].lru_list, &zram->list);
+		spin_unlock_irqrestore(&zram->list_lock, irq_flags);
+		zram_set_flag(zram, index, ZRAM_LRU);
+		atomic64_inc(&zram->stats.lru_pages);
+	}
+#else
+	// Skip LRU writeback because memcg is not available
 #endif
+#endif
+
 	}
 	zram_slot_unlock(zram, index);
 
