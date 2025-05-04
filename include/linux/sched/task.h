@@ -29,6 +29,10 @@ extern struct task_struct init_task;
 extern int lockdep_tasklist_lock_is_held(void);
 #endif /* #ifdef CONFIG_PROVE_RCU */
 
+#ifdef CONFIG_ANDROID_SIMPLE_LMK
+extern struct task_struct *simple_lmk_next;
+#endif
+
 extern asmlinkage void schedule_tail(struct task_struct *prev);
 extern void init_idle(struct task_struct *idle, int cpu);
 

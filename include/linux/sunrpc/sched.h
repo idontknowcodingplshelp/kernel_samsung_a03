@@ -17,9 +17,6 @@
 #include <linux/wait_bit.h>
 #include <linux/workqueue.h>
 #include <linux/sunrpc/xdr.h>
-#ifdef CONFIG_ANDROID_SIMPLE_LMK
-	struct task_struct *simple_lmk_next;
-#endif
 
 /*
  * This is the actual RPC procedure call info.
