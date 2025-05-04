@@ -18,7 +18,7 @@
 #include <linux/workqueue.h>
 #include <linux/sunrpc/xdr.h>
 #ifdef CONFIG_ANDROID_SIMPLE_LMK
-struct task_struct *simple_lmk_next;
+	struct task_struct *simple_lmk_next;
 #endif
 
 /*
